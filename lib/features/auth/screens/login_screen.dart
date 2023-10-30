@@ -2,8 +2,10 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_ui/common/utils/colors.dart';
+import 'package:whatsapp_ui/common/utils/utils.dart';
 
 import 'package:whatsapp_ui/common/widgets/custom_button.dart';
+import 'package:whatsapp_ui/features/auth/controller/auth_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';
@@ -33,16 +35,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         });
   }
 
-  // void sendPhoneNumber() {
-  //   String phoneNumber = phoneController.text.trim();
-  //   if (country != null && phoneNumber.isNotEmpty) {
-  //     ref
-  //         .read(authControllerProvider)
-  //         .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
-  //   } else {
-  //     showSnackBar(context: context, content: 'Fill out all the fields');
-  //   }
-  // }
+  void sendPhoneNumber() {
+    String phoneNumber = phoneController.text.trim();
+    if (country != null && phoneNumber.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+    } else {
+      showSnackBar(context: context, content: 'Fill out all the fields');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +88,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               SizedBox(
                 width: 90,
                 child: CustomButton(
-                  onPressed: () {}, //sendPhoneNumber,
+                  onPressed: sendPhoneNumber,
                   text: 'NEXT',
                 ),
               ),

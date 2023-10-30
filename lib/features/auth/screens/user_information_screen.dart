@@ -29,17 +29,19 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     setState(() {});
   }
 
-  // void storeUserData() async {
-  //   String name = nameController.text.trim();
+  void storeUserData() async {
+    String name = nameController.text.trim();
 
-  //   if (name.isNotEmpty) {
-  //     ref.read(authControllerProvider).saveUserDataToFirebase(
-  //           context,
-  //           name,
-  //           image,
-  //         );
-  //   }
-  // }
+    if (name.isNotEmpty) {
+      ref.read(authControllerProvider).saveUserDataToFirebase(
+            context,
+            name,
+            image,
+          );
+    } else {
+      showSnackBar(context: context, content: 'Fill out the  name field');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {}, //storeUserData,
+                    onPressed: storeUserData,
                     icon: const Icon(
                       Icons.done,
                     ),
